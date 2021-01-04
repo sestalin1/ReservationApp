@@ -11,17 +11,35 @@ namespace ReservationApp.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string ReservationId { get; set; }
+        public string Id { get; set; }
 
         [Required]
-        [Display(Name = "Date")]
+        [Display(Name = "Title")]
+        [Column(TypeName = "nvarchar(100)")]
+        public string Title { get; set; }
+
+        [Required]
+        [Display(Name = "Creation Date")]
         [Column(TypeName = "Date")]
-        public DateTime ReservationDate { get; set; }
+        public DateTime CreationDate { get; set; }
+
+        [Required]
+        [Display(Name = "Target Date")]
+        [Column(TypeName = "Date")]
+        public DateTime TargetDate { get; set; }
 
         [Required]
         [Display(Name = "Description")]
         [Column(TypeName = "nvarchar(100)")]
-        public string ReservationDescription { get; set; }
+        public string Description { get; set; }
+
+        [Display(Name = "Rating")]
+        [Column(TypeName = "decimal(1,1)")]
+        public decimal Rating { get; set; }
+
+        [Display(Name = "Is Favorite?")]
+        public bool IsFavorite {get; set;}
+
 
         [Required]
         [Display(Name = "Contact Name")]

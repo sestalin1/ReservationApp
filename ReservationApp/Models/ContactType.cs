@@ -10,16 +10,17 @@ namespace ReservationApp.Models
     public class ContactType
     {
         [Key]
-        public int CTId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
 
         [Required]
         [Display(Name = "Contact Type")]
         [Column(TypeName = "nvarchar(20)")]
-        public string CTName { get; set; }
+        public string Name { get; set; }
 
         [Display(Name = "Description")]
         [Column(TypeName = "nvarchar(100)")]
-        public string CTDescription { get; set; }
+        public string Description { get; set; }
 
         public virtual Contact Contact { get; set; }
     }

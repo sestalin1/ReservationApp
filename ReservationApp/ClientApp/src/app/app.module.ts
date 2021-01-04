@@ -5,13 +5,15 @@ import { AppComponent } from './app.component';
 import { ContactTypesComponent } from './contact-types/contact-types.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { ReservationsComponent } from './reservations/reservations.component';
+import { HeaderComponent } from './layout/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContactTypesComponent,
     ContactsComponent,
-    ReservationsComponent
+    ReservationsComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule

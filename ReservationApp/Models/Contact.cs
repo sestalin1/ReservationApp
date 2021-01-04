@@ -10,23 +10,29 @@ namespace ReservationApp.Models
     public class Contact
     {
         [Key]
-        public int ContactId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+
+        [Required]
+        [Column(TypeName = "nvarchar(50)")]
+        [Display(Name = "Entity")]
+        public string Entity { get; set; }
 
         [Required]
         [Column(TypeName = "nvarchar(50)")]
         [Display(Name = "Name")]
-        public string ContactName { get; set; }
+        public string Name { get; set; }
 
         [Required(ErrorMessage = "You must insert a phone number")]
         [Display(Name = "Phone Number")]
         [DataType(DataType.PhoneNumber)]
         [Column(TypeName = "varchar(12)")]
-        public string ContactPhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
         
         [Required]
         [Column(TypeName = "Date")]
         [Display(Name = "Birthday")]
-        public DateTime ContactBirthday { get; set; }
+        public DateTime Birthday { get; set; }
 
         [Required]
         [Display(Name = "Contact Type")]

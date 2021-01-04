@@ -35,7 +35,7 @@ namespace ReservationApp.Controllers
 
             var contact = await _context.Contacts
                 .Include(c => c.ContactType)
-                .FirstOrDefaultAsync(m => m.ContactId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (contact == null)
             {
                 return NotFound();
@@ -92,7 +92,7 @@ namespace ReservationApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ContactId,ContactName,ContactPhoneNumber,ContactBirthday,ContactTypeId")] Contact contact)
         {
-            if (id != contact.ContactId)
+            if (id != contact.Id)
             {
                 return NotFound();
             }
@@ -106,7 +106,7 @@ namespace ReservationApp.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ContactExists(contact.ContactId))
+                    if (!ContactExists(contact.Id))
                     {
                         return NotFound();
                     }
@@ -131,7 +131,7 @@ namespace ReservationApp.Controllers
 
             var contact = await _context.Contacts
                 .Include(c => c.ContactType)
-                .FirstOrDefaultAsync(m => m.ContactId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (contact == null)
             {
                 return NotFound();
@@ -153,7 +153,7 @@ namespace ReservationApp.Controllers
 
         private bool ContactExists(int id)
         {
-            return _context.Contacts.Any(e => e.ContactId == id);
+            return _context.Contacts.Any(e => e.Id == id);
         }
     }
 }
