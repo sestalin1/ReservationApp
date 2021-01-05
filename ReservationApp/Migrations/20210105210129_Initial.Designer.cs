@@ -10,8 +10,8 @@ using ReservationApp.Models;
 namespace ReservationApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210101233911_RequirementsUpdate")]
-    partial class RequirementsUpdate
+    [Migration("20210105210129_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,7 +19,7 @@ namespace ReservationApp.Migrations
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.0");
+                .HasAnnotation("ProductVersion", "5.0.1");
 
             modelBuilder.Entity("ReservationApp.Models.Contact", b =>
                 {

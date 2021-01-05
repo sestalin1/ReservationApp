@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ReservationApp.Models;
 
 namespace ReservationApp.Controllers
 {
-    public class ContactTypesController : Controller
+    [Produces("application/json")]
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ContactTypesController : ControllerBase
     {
         private readonly AppDbContext _context;
 
@@ -18,130 +21,83 @@ namespace ReservationApp.Controllers
             _context = context;
         }
 
-        // GET: ContactTypes
-        public async Task<IActionResult> Index()
+        // GET: api/ContactTypes
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ContactType>>> GetContactTypes()
         {
-            return View(await _context.ContactTypes.ToListAsync());
+            return await _context.ContactTypes.ToListAsync();
         }
 
-        // GET: ContactTypes/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: api/ContactTypes/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ContactType>> GetContactType(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var contactType = await _context.ContactTypes
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (contactType == null)
-            {
-                return NotFound();
-            }
-
-            return View(contactType);
-        }
-
-        // GET: ContactTypes/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: ContactTypes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CTId,CTName,CTDescription")] ContactType contactType)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(contactType);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(contactType);
-        }
-
-        // GET: ContactTypes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var contactType = await _context.ContactTypes.FindAsync(id);
+
             if (contactType == null)
             {
                 return NotFound();
             }
-            return View(contactType);
+
+            return contactType;
         }
 
-        // POST: ContactTypes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CTId,CTName,CTDescription")] ContactType contactType)
+        // PUT: api/ContactTypes/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutContactType(int id, ContactType contactType)
         {
             if (id != contactType.Id)
             {
-                return NotFound();
+                return BadRequest();
             }
 
-            if (ModelState.IsValid)
+            _context.Entry(contactType).State = EntityState.Modified;
+
+            try
             {
-                try
-                {
-                    _context.Update(contactType);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ContactTypeExists(contactType.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                await _context.SaveChangesAsync();
             }
-            return View(contactType);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ContactTypeExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
 
-        // GET: ContactTypes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // POST: api/ContactTypes
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<ContactType>> PostContactType(ContactType contactType)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            _context.ContactTypes.Add(contactType);
+            await _context.SaveChangesAsync();
 
-            var contactType = await _context.ContactTypes
-                .FirstOrDefaultAsync(m => m.Id == id);
+            return CreatedAtAction("GetContactType", new { id = contactType.Id }, contactType);
+        }
+
+        // DELETE: api/ContactTypes/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteContactType(int id)
+        {
+            var contactType = await _context.ContactTypes.FindAsync(id);
             if (contactType == null)
             {
                 return NotFound();
             }
 
-            return View(contactType);
-        }
-
-        // POST: ContactTypes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var contactType = await _context.ContactTypes.FindAsync(id);
             _context.ContactTypes.Remove(contactType);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            return NoContent();
         }
 
         private bool ContactTypeExists(int id)

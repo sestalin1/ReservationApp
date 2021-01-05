@@ -11,35 +11,36 @@ namespace ReservationApp.Migrations
                 name: "ContactTypes",
                 columns: table => new
                 {
-                    CTId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CTName = table.Column<string>(type: "nvarchar(20)", nullable: false),
-                    CTDescription = table.Column<string>(type: "nvarchar(100)", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(20)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(100)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ContactTypes", x => x.CTId);
+                    table.PrimaryKey("PK_ContactTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Contacts",
                 columns: table => new
                 {
-                    ContactId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ContactName = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    ContactPhoneNumber = table.Column<string>(type: "varchar(12)", nullable: false),
-                    ContactBirthday = table.Column<DateTime>(type: "Date", nullable: false),
+                    Entity = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "varchar(12)", nullable: false),
+                    Birthday = table.Column<DateTime>(type: "Date", nullable: false),
                     ContactTypeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Contacts", x => x.ContactId);
+                    table.PrimaryKey("PK_Contacts", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Contacts_ContactTypes_ContactTypeId",
                         column: x => x.ContactTypeId,
                         principalTable: "ContactTypes",
-                        principalColumn: "CTId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -47,20 +48,24 @@ namespace ReservationApp.Migrations
                 name: "Reservations",
                 columns: table => new
                 {
-                    ReservationId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ReservationDate = table.Column<DateTime>(type: "Date", nullable: false),
-                    ReservationDescription = table.Column<string>(type: "nvarchar(100)", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(100)", nullable: false),
+                    CreationDate = table.Column<DateTime>(type: "Date", nullable: false),
+                    TargetDate = table.Column<DateTime>(type: "Date", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(100)", nullable: false),
+                    Rating = table.Column<decimal>(type: "decimal(1,1)", nullable: false),
+                    IsFavorite = table.Column<bool>(type: "bit", nullable: false),
                     ContactId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContactId1 = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Reservations", x => x.ReservationId);
+                    table.PrimaryKey("PK_Reservations", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Reservations_Contacts_ContactId1",
                         column: x => x.ContactId1,
                         principalTable: "Contacts",
-                        principalColumn: "ContactId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
