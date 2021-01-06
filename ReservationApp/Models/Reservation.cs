@@ -14,26 +14,21 @@ namespace ReservationApp.Models
         public string Id { get; set; }
 
         [Required]
-        [Display(Name = "Title")]
         [Column(TypeName = "nvarchar(100)")]
         public string Title { get; set; }
 
         [Required]
-        [Display(Name = "Creation Date")]
         [Column(TypeName = "Date")]
         public DateTime CreationDate { get; set; }
 
         [Required]
-        [Display(Name = "Target Date")]
         [Column(TypeName = "Date")]
         public DateTime TargetDate { get; set; }
 
         [Required]
-        [Display(Name = "Description")]
         [Column(TypeName = "nvarchar(100)")]
         public string Description { get; set; }
 
-        [Display(Name = "Rating")]
         [Column(TypeName = "decimal(1,1)")]
         public decimal Rating { get; set; }
 
@@ -42,8 +37,8 @@ namespace ReservationApp.Models
 
 
         [Required]
-        [Display(Name = "Contact Name")]
-        public string ContactId { get; set; }
+        [ForeignKey("Contact")]
+        public int ContactId { get; set; }
         public virtual Contact Contact { get; set; }
     }
 }
