@@ -69,6 +69,14 @@ namespace ReservationApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ContactTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Default type",
+                            Name = "Default"
+                        });
                 });
 
             modelBuilder.Entity("ReservationApp.Models.Reservation", b =>

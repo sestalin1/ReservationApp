@@ -69,6 +69,11 @@ namespace ReservationApp.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.InsertData(
+                table: "ContactTypes",
+                columns: new[] { "Id", "Description", "Name" },
+                values: new object[] { 1, "Default type", "Default" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Contacts_ContactTypeId",
                 table: "Contacts",

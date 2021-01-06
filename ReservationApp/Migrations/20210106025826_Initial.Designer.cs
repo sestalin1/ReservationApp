@@ -10,7 +10,7 @@ using ReservationApp.Models;
 namespace ReservationApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210105210129_Initial")]
+    [Migration("20210106025826_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,6 +71,14 @@ namespace ReservationApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ContactTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Default type",
+                            Name = "Default"
+                        });
                 });
 
             modelBuilder.Entity("ReservationApp.Models.Reservation", b =>
