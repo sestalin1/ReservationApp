@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class ContactTypesService {
 
   private headers: HttpHeaders;
-  private accessPointUrl: string = 'http://localhost:44397/api/ctypes';
+  private accessPointUrl: string = 'https://localhost:44397/api/ctypes';
 
   constructor(private http: HttpClient) {
 

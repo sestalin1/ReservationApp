@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class ReservationsService {
 
   private headers: HttpHeaders;
-  private accessPointUrl: string = 'http://localhost:44397/api/reservations';
+  private accessPointUrl: string = 'https://localhost:44397/api/reservations';
 
 
   constructor(private http: HttpClient) {

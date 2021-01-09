@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-reservations',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReservationsComponent implements OnInit {
 
-  constructor() { }
+  title = 'Reservation List';
+  btnText = 'CREATE RESERVATION';
+  ReservationsData = [];
+
+  //@Input() ReservationsData: Array<any>;
+
+  constructor() {
+
+  }
 
   ngOnInit(): void {
+
+    console.log("ReservationsData[]", this);
+
+   // if (this.ReservationsData)
+
   }
 
 }

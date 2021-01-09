@@ -1,12 +1,63 @@
-<nav class="navbar navbar-light bg-light ">
-  <div class="container">
+<div class="row bg-light pt-3">
+  <div class="col-md-12">
+    <div class="row ">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
 
-    <div class=" row">
-      <span class="col-md-2"></span>
-      <h5 class="   col-md-4 text-right ">Reservation List</h5>
-      <span class="col-md-3">Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</span>
-      <span class="col-md-3"><input type="button" value="Create Resesrvation"/></span>
+        <div class="row">
+
+          <div class="col-md-3">
+            <h5 class="text-danger">{{title}}</h5>
+          </div>
+          <div class="col-md-6">
+            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+          </div>
+          <div class="col-md-3">
+            <input class="btn btn-secondary " type="button" value="{{btnText}}" />
+          </div>
+
+        </div>
+               
+      </div>
+      <div class="col-md-2"></div>
     </div>
   </div>
-</nav>
+</div>
 
+<div class="row mt-3 ">
+  <div class="col-md-12 ">
+    <div class="row ">
+      <div class="col-md-2"></div>
+      <div class="col-md-8 bg-light  ">
+        <div class="row py-3">
+          <div class="col-md-3">
+            <select >
+              <option selected>Sort by</option>
+            </select>
+          </div>
+          <div class="col-md-9"></div>
+        </div>
+
+        <div class="row dataRow m-1" *ngFor="let r of ReservationsData">
+          
+          <div class="col-md-3 pt-1">
+
+            <div class="row ">
+              <img src="/" class="img-thumbnail col-md-3" />
+              <div class="col-md-9">
+                <strong class="d-block">{{r.title}}</strong>
+                <small>{{r.targetDate}}</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3"><span>Rating<i>{{r.rating}}</i></span></div>
+          <div class="col-md-3"><span>Add to favorites <i>{{r.isFavorite}}</i></span></div>
+          <div class="col-md-3"><span><input class="btn btn-secondary" type="button" value="EDIT" /></span></div>
+
+        </div>
+
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</div>

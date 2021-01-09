@@ -50,6 +50,17 @@ namespace ReservationApp.Migrations
                         .IsUnique();
 
                     b.ToTable("Contacts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Birthday = new DateTime(2021, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ContactTypeId = 1,
+                            Entity = "Default",
+                            Name = "Default",
+                            PhoneNumber = "+549645897"
+                        });
                 });
 
             modelBuilder.Entity("ReservationApp.Models.ContactType", b =>
@@ -81,9 +92,10 @@ namespace ReservationApp.Migrations
 
             modelBuilder.Entity("ReservationApp.Models.Reservation", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
                     b.Property<int>("ContactId")
                         .HasColumnType("int");
@@ -99,7 +111,7 @@ namespace ReservationApp.Migrations
                         .HasColumnType("bit");
 
                     b.Property<decimal>("Rating")
-                        .HasColumnType("decimal(1,1)");
+                        .HasColumnType("decimal(2,1)");
 
                     b.Property<DateTime>("TargetDate")
                         .HasColumnType("Date");
@@ -113,6 +125,19 @@ namespace ReservationApp.Migrations
                     b.HasIndex("ContactId");
 
                     b.ToTable("Reservations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ContactId = 1,
+                            CreationDate = new DateTime(2021, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Default",
+                            IsFavorite = false,
+                            Rating = 3.5m,
+                            TargetDate = new DateTime(2021, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Default"
+                        });
                 });
 
             modelBuilder.Entity("ReservationApp.Models.Contact", b =>

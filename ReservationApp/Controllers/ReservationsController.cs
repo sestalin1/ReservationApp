@@ -45,7 +45,7 @@ namespace ReservationApp.Controllers
         // PUT: api/Reservations/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutReservation(string id, Reservation reservation)
+        public async Task<IActionResult> PutReservation(int id, Reservation reservation)
         {
             if (id != reservation.Id)
             {
@@ -100,7 +100,7 @@ namespace ReservationApp.Controllers
             return NoContent();
         }
 
-        private bool ReservationExists(string id)
+        private bool ReservationExists(int id)
         {
             return _context.Reservations.Any(e => e.Id == id);
         }
